@@ -30,7 +30,7 @@ std::istream& operator>>(std::istream& is, Reservoir& reservoir) {
     is >> reservoir.length;
     std::cout << "¬вед≥ть максимальну глибину водойми: ";
     is >> reservoir.maxDepth;
-    is.ignore(); // Clear the newline character from the buffer
+    is.ignore();
     return is;
 }
 
