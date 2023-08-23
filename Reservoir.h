@@ -1,22 +1,31 @@
-
-#include <string>
 #include <iostream>
+#include <string>
 
 class Reservoir {
-public:
-    Reservoir();
-    Reservoir(const std::string& name, double width, double length, double maxDepth);
-
-    double approximateVolume() const;
-    double surfaceArea() const;
-    bool sameType(const Reservoir& other) const;
-    bool operator<(const Reservoir& other) const;
-    friend std::istream& operator>>(std::istream& is, Reservoir& reservoir);
-    friend std::ostream& operator<<(std::ostream& os, const Reservoir& reservoir);
-
 private:
     std::string name;
     double width;
     double length;
     double maxDepth;
+
+public:
+    Reservoir();
+    Reservoir(const std::string& name, double width, double length, double maxDepth);
+
+    std::string getName() const;
+    double getWidth() const;
+    double getLength() const;
+    double getMaxDepth() const;
+
+    double calculateVolume() const;
+    double calculateArea() const;
+    bool isSameType(const Reservoir& other) const;
+
+    Reservoir(const Reservoir& other);
+
+    ~Reservoir();
+
+    Reservoir& operator=(const Reservoir& other);
+
+    void display() const;
 };

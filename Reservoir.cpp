@@ -1,42 +1,66 @@
+#include <iostream>
 #include "Reservoir.h"
 
-Reservoir::Reservoir() : name(""), width(0.0), length(0.0), maxDepth(0.0) {}
+Reservoir::Reservoir() : name(""), width(0), length(0), maxDepth(0) {}
 
 Reservoir::Reservoir(const std::string& name, double width, double length, double maxDepth)
     : name(name), width(width), length(length), maxDepth(maxDepth) {}
 
-double Reservoir::approximateVolume() const {
+std::string Reservoir::getName() const {
+    return name;
+}
+
+double Reservoir::getWidth() const {
+    return width;
+}
+
+double Reservoir::getLength() const {
+    return length;
+}
+
+double Reservoir::getMaxDepth() const {
+    return maxDepth;
+}
+
+double Reservoir::calculateVolume() const {
     return width * length * maxDepth;
 }
 
-double Reservoir::surfaceArea() const {
+double Reservoir::calculateArea() const {
     return width * length;
 }
 
-bool Reservoir::sameType(const Reservoir& other) const {
-    return (surfaceArea() == other.surfaceArea());
+bool Reservoir::isSameType(const Reservoir& other) const {
+
+    return maxDepth == other.maxDepth;
 }
 
-bool Reservoir::operator<(const Reservoir& other) const {
-    return (approximateVolume() < other.approximateVolume());
+Reservoir::Reservoir(const Reservoir& other) {
+
+    name = other.name;
+    width = other.width;
+    length = other.length;
+    maxDepth = other.maxDepth;
 }
 
-std::istream& operator>>(std::istream& is, Reservoir& reservoir) {
-    std::cout << "Введіть назву водойми: ";
-    std::getline(is, reservoir.name);
-    std::cout << "Введіть ширину водойми: ";
-    is >> reservoir.width;
-    std::cout << "Введіть довжину водойми: ";
-    is >> reservoir.length;
-    std::cout << "Введіть максимальну глибину водойми: ";
-    is >> reservoir.maxDepth;
-    is.ignore();
-    return is;
+Reservoir::~Reservoir() {
+
 }
 
-std::ostream& operator<<(std::ostream& os, const Reservoir& reservoir) {
-    os << "Назва: " << reservoir.name << "\n";
-    os << "Площа поверхні: " << reservoir.surfaceArea() << " м^2\n";
-    os << "Приблизний обсяг: " << reservoir.approximateVolume() << " м^3\n";
-    return os;
+Reservoir& Reservoir::operator=(const Reservoir& other) {
+
+    if (this != &other) {
+        name = other.name;
+        width = other.width;
+        length = other.length;
+        maxDepth = other.maxDepth;
+    }
+    return *this;
+}
+
+void Reservoir::display() const {
+    std::cout << "Назва: " << name << "\n";
+    std::cout << "Ширина: " << width << " м\n";
+    std::cout << "Довжина: " << length << " м\n";
+    std::cout << "Максимальна глибина: " << maxDepth << " м\n";
 }
